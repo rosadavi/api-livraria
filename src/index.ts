@@ -1,4 +1,6 @@
 import express from 'express';
+import 'reflect-metadata';
+import { AppDataSource } from './data-source';
 import {Livros} from './controllers/livrosController';
 import dotenv from 'dotenv';
 
@@ -13,5 +15,12 @@ app.use(express.json());
 app.use('/', livrosController.listar);
 
 app.listen(PORT, () => {
+    AppDataSource.initialize()
+  .then(() => {
+    console.log("Conexao com o banco de dados estabelecida com sucesso!");
+  })
+  .catch((error)=> {
+    console.error("Falha ao conectar ao banco de dados: ", error);
+  });
     console.log("Sistema rodando na porta "+PORT);
 });

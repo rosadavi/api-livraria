@@ -3,11 +3,11 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 @Entity()
 export class Livro {
   @PrimaryGeneratedColumn()
-  id: number | undefined;
+  id: number;
 
   @Column()
-  nome_livro: string | undefined;
+  nome_livro: string;
 
   @Column()
-  autor_livro: string | undefined;
+  autor_livro: string;
 }
