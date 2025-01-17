@@ -5,9 +5,12 @@ export class Livro {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: "varchar", length: 255 })
   nome_livro: string;
 
-  @Column()
-  autor_livro: string;
+  @Column({ type: "int" })
+  ano: number;
+
+  @Column({ type: "varchar", length: 255 })
+  autor: string;
 }

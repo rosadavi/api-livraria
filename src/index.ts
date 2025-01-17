@@ -1,18 +1,17 @@
+import { AppDataSource } from './data-source';
+import routeLivros from './routes/livroRoutes';
 import express from 'express';
 import 'reflect-metadata';
-import { AppDataSource } from './data-source';
-import {Livros} from './controllers/livrosController';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT;
-const livrosController = new Livros();
 
 app.use(express.json());
 
-app.use('/', livrosController.listar);
+app.use('/livros', routeLivros);
 
 app.listen(PORT, () => {
     AppDataSource.initialize()
