@@ -102,4 +102,29 @@ export class Livros {
             return;
         }
     }
+
+    async deletar(req: Request, res: Response) {
+        try {
+            const id = req.body.id;
+            const livros = AppDataSource.getRepository(Livro);
+            const nomeLivro = await livros.find({
+                select: {
+                    nome_livro: true
+                },
+                where: {
+                    id
+                }
+            });
+            await livros.delete(id);
+            res.status(200).json({
+                msg: `Livro "${nomeLivro[0].nome_livro}" deletado com sucesso!`
+            });
+        } catch (e) {
+            res.status(500).json({
+                msg: "Erro ao deletar livro!"
+            });
+            console.error("Erro ao deletar livro: ", e);
+            return;
+        }
+    }
 }
